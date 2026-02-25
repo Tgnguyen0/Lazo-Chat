@@ -35,6 +35,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _RegisterPage();
+}
+
+class _RegisterPage extends State<RegisterPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: const Text("Đăng ký")),
+        body: const Center(
+            child: Text("Đây là trang đăng ký")
+        )
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -65,6 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  void _toRegisterPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (contex) => const RegisterPage())
+    );
   }
 
   @override
@@ -112,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 "ĐĂNG NHẬP",
                 style: TextStyle(
                   fontSize: 28,
-                  color: Color.fromRGBO(164, 24, 72, 255),
+                  color: Color.fromRGBO(0, 0, 0, 255),
                   backgroundColor: Color.fromRGBO(255, 255, 255, 255),
                   fontWeight: FontWeight.bold,
                 ),
@@ -159,6 +185,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     print("Bạn đã bấm đăng nhập");
                   },
 
+                  // Chỉnh style cho ElevatedButton và theo dõi state của ElevatedButton
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                          (states) {
+                        if (states.contains(WidgetState.pressed)) {
+                          return Colors.red;
+                        }
+                        return const Color.fromRGBO(120, 120, 120, 1);
+                      },
+                    ),
+                    foregroundColor: WidgetStateProperty.all<Color>(
+                      Colors.white,
+                    ),
+                  ),
+
                   child: const Text(
                     "Đăng nhập",
                     style: TextStyle(fontSize: 18),
@@ -170,7 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _toRegisterPage,
         tooltip: 'Thêm tài khoản',
         child: const Icon(Icons.add),
       ),
