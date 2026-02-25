@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 255),
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -98,11 +98,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
             children: [
 
+              // ===== LOGO =====
+              Image.asset(
+                "assets/images/logo.png",
+                height: 120,
+              ),
+
+              // Khoảng cách giữa logo và tiêu đề
+              const SizedBox(height: 30),
+
               // ===== TIÊU ĐỀ =====
               const Text(
                 "ĐĂNG NHẬP",
                 style: TextStyle(
                   fontSize: 28,
+                  color: Color.fromRGBO(164, 24, 72, 255),
+                  backgroundColor: Color.fromRGBO(255, 255, 255, 255),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -113,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // ===== Ô NHẬP EMAIL =====
               TextField(
                 decoration: InputDecoration(
-                  labelText: "Email", // Chữ hiển thị trong ô
+                  labelText: "Số điện thoại hay Email", // Chữ hiển thị trong ô
                   prefixIcon: const Icon(Icons.email), // Icon bên trái
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12), // Bo góc
