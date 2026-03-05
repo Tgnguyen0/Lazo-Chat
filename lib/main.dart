@@ -43,13 +43,226 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPage extends State<RegisterPage> {
+  bool agreedToTerms = false;
+
+  void _toMainPage() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const MyHomePage(title: "Đăng nhập"))
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text("Đăng ký")),
-        body: const Center(
-            child: Text("Đây là trang đăng ký")
-        )
+
+        // Scrollbar
+        body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                children: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                    height: 120,
+                  ),
+
+                  const SizedBox(height: 30,),
+
+                  const Text(
+                    "ĐĂNG KÝ",
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Color.fromRGBO(0, 0, 0, 255),
+                      backgroundColor: Color.fromRGBO(255, 255, 255, 255),
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+
+                  const SizedBox(height: 30,),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                        "Tên người dùng",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromRGBO(0, 0, 0, 255),
+                          backgroundColor: Color.fromRGBO(255, 255, 255, 255),
+                          fontWeight: FontWeight.bold,
+                        )
+                    ),
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Tên người dùng",
+                      prefixIcon: const Icon(Icons.person),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                      )
+                    ),
+                  ),
+
+                  const SizedBox(height: 20,),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Email",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromRGBO(0, 0, 0, 255),
+                        backgroundColor: Color.fromRGBO(255, 255, 255, 255),
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      prefixIcon: Icon(Icons.email),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                      )
+                    ),
+                  ),
+
+                  const SizedBox(height: 20,),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Số điện thoại",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromRGBO(0, 0, 0, 255),
+                        backgroundColor: Color.fromRGBO(255, 255, 255, 255),
+                        fontWeight: FontWeight.bold
+                      )
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Số điện thoại",
+                      prefixIcon: Icon(Icons.phone),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12)
+                      )
+                    ),
+                  ),
+
+                  const SizedBox(height: 20,),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Mật khẩu",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromRGBO(0, 0, 0, 255)
+                      )
+                    )
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Mật khẩu",
+                      prefixIcon: Icon(Icons.password),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                      )
+                    ),
+                  ),
+
+                  const SizedBox(height: 20,),
+
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: const Text(
+                          "Nhập lại mật khẩu",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromRGBO(0, 0, 0, 255)
+                          )
+                      )
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  TextField(
+                    decoration: InputDecoration(
+                        labelText: "Mật khẩu nhập lại",
+                        prefixIcon: Icon(Icons.password),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12)
+                        )
+                    ),
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  // ===== Checkbox =====
+                  CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,  // kiểu dẫn đầu
+                    title: const Text("Bạn đã đồng ý với điều khoản dịch vụ của chúng tôi"),
+                    value: agreedToTerms,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        agreedToTerms = value ?? false;
+                      });
+                    },
+                  ),
+
+                  SizedBox(
+                    width: double.infinity, // Nút chiếm toàn bộ chiều ngang
+                    height: 50,
+
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Hàm chạy khi bấm nút
+                        print("Bạn đã bấm đăng nhập");
+                      },
+
+                      // Chỉnh style cho ElevatedButton và theo dõi state của ElevatedButton
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                              (states) {
+                            if (states.contains(WidgetState.pressed)) {
+                              return Colors.red;
+                            }
+                            return const Color.fromRGBO(120, 120, 120, 1);
+                          },
+                        ),
+                        foregroundColor: WidgetStateProperty.all<Color>(
+                          Colors.white,
+                        ),
+                      ),
+
+                      child: const Text(
+                        "Đăng ký",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+        ),
     );
   }
 }
